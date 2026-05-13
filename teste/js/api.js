@@ -1,4 +1,4 @@
-const API_KEY = "0912b7016dd3bbc828da5274e89da75c";
+const API_KEY = "";
 const BASE_URL = "https://api.themoviedb.org/3";
 
 export const IMG = "https://image.tmdb.org/t/p/w500";
