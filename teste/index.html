@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>🎬 MovieSearch</title>
+
+  <!-- FONTES -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container nav">
+
+      <div class="logo">
+        🎬 MovieSearch
+      </div>
+
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Buscar filmes...">
+        <button id="searchBtn">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-content container">
+        <h1>Descubra filmes incríveis</h1>
+        <p>Pesquise, explore e veja detalhes em tempo real</p>
+      </div>
+    </section>
+
+    <!-- FILMES PRINCIPAIS -->
+    <section class="container">
+
+      <h2>Filmes Populares</h2>
+
+      <!-- GRID PRINCIPAL (renderMovies) -->
+      <div id="moviesGrid" class="movies-grid"></div>
+
+    </section>
+
+    <!-- LISTA 1 -->
+    <section class="container">
+
+      <h2>Mais bem avaliados</h2>
+
+      <div id="topRatedList" class="horizontal-list"></div>
+
+    </section>
+
+    <!-- LISTA 2 -->
+    <section class="container">
+
+      <h2>Em exibição</h2>
+
+      <div id="nowPlayingList" class="horizontal-list"></div>
+
+    </section>
+
+  </main>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal">
+
+    <div class="modal-content">
+
+      <span id="closeModal" class="close-modal">&times;</span>
+
+      <div id="modalData"></div>
+
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 MovieSearch - Projeto de estudo TMDB API</p>
+    </div>
+  </footer>
+
+  <!-- JS MODULAR -->
+  <script type="module" src="./js/app.js"></script>
+
+</body>
+</html>
