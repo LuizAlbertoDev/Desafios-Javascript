@@ -1,13 +1,41 @@
 // quais acoes meu carrinho deve ter ?
 
 // adicionar um item
-async function additem(userCart,item){
-    userCart.push(item)
+async function addItem(userCart, item) {
+    const indexFound = userCart.findIndex((p) => p.name === item.name);
+
+    if (indexFound !== -1) {
+        userCart[indexFound].quantity += item.quantity;
+        return;
+    }
+    userCart.push(item);
 }
 
-// remover um item - diminuir a quantidade do item ou remover completamente do carrinho
-async function removeitem(userCart,index){
-    if(index >= 0 && index < userCart.length)
+// remover um item - diminuir a quantidade ou remover se for o último
+async function removeItem(userCart, item) {
+    const indexFound = userCart.findIndex((p) => p.name === item.name);
+
+    if (indexFound === -1) {
+        console.log("❌ Item não encontrado no carrinho.");
+        return;
+    }
+
+    if (userCart[indexFound].quantity > 1) {
+        userCart[indexFound].quantity -= 1;
+        console.log(`➖ 1 unidade de "${item.name}" removida.`);
+    } 
+    
+    else {
+        userCart.splice(indexFound, 1);
+        console.log(`🗑️ "${item.name}" removido do carrinho.`);
+    }
+}
+
+// calcular o valor total
+async function calculateTotal(userCart) {
+    // Calculando diretamente para evitar erros de contexto (this)
+    const result = userCart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    console.log(`\n💰 Shopee Cart Total: R$ ${result.toFixed(2)}`);
 }
 
 async function displayCart(userCart){
@@ -19,7 +47,7 @@ async function displayCart(userCart){
 }
 
 // deletar um item do carrinho
-async function deleteitem(userCart,name){
+async function deleteItem(userCart,name){
     
     const index = userCart.findIndex(item => item.name === name)
     if(index !== -1){
@@ -34,23 +62,17 @@ async function listItems(userCart){
 }
 
 // limpar o carrinho
-async function clearCart(userCart){
-
+async function clearCart(userCart) {
+    userCart.length = 0; 
+    console.log("\n🧹 Shopee cart is now empty!");
 }
-
-// calcular o valor total do carrinho
-async function calculateTotal(userCart){
-     const result = userCart.reduce((total, item) => total + item.subtotal(),0)
-     console.log(`\n💰 Shopee Cart Total: R$ ${result.toFixed(2)}`)
-}
-
 
 export {
-    additem,
+    addItem,
     calculateTotal,
     listItems,
     clearCart,
-    removeitem,
-    deleteitem,
+    removeItem,
+    deleteItem,
     displayCart
 }

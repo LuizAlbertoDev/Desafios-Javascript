@@ -1,20 +1,25 @@
-import createItem from "./services/item.js";
-import * as cartService from "./services/cart.js"
+    import createItem from "./services/item.js";
+    import * as cartService from "./services/cart.js"
 
 
-const cart = []
-const myWhishList = []
+    const cart = []
+    const myWhishList = []
 
-console.log("👜 welcome to the your shopee Cart!")
+    console.log("👜 welcome to the your shopee Cart!")
 
-const item1 = await createItem("LapTop", 5000, 1)
+    const item1 = await createItem("LapTop", 5000, 1)
 
-const item2 = await createItem("Mouse", 150, 2)
+    const item2 = await createItem("Mouse", 150, 3)
 
-await cartService.additem(cart,item1)
-await cartService.additem(cart,item2)
-await cartService.displayCart(cart)
+    // adicionar itens no carrinho
+    await cartService.addItem(cart,item1)
+    await cartService.addItem(cart,item2)
 
-// await cartService.deleteitem(cart,item1.name)
+    // remover um item do carrinho
+    await cartService.removeItem(cart,item2)
 
-await cartService.calculateTotal(cart)
+    // exibir os itens do carrinho
+    await cartService.displayCart(cart)
+
+    // calcular o valor total do carrinho
+    await cartService.calculateTotal(cart)
