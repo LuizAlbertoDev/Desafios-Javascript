@@ -5,44 +5,17 @@ const estoque = [
   { nome: "Fone de Ouvido", preco: 75, qtd: 3 }
 ];
 
-function verificarDisponibilidade(estoque) {
-    const produtosDisponiveis = estoque.filter(item => item.qtd > 0);
-    return produtosDisponiveis;
+// Filtra os disponíveis 
+const obterDisponiveis = lista => lista.filter(item => item.qtd > 0);
+
+// Calcula o valor total do estoque (Preço x Qtd)
+function exibirValorTotalEstoque(lista) {
+    const total = lista.reduce((acc, produto) => acc + (produto.preco * produto.qtd), 0);
+    
+    console.log(`Valor total do estoque: ${total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}`);
 }
 
-function somarValorTotalEstoque(estoque) {
+const produtosDisponiveis = obterDisponiveis(estoque);
 
-    const total = estoque.reduce((acc, produto) => {
-        return acc + (produto.preco * produto.qtd);
-    }, 0);
-
-    console.log(
-        `Valor total do estoque: ${total.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL"
-        })}`
-    );
-}
-
-function somarPrecosProdutosDisponiveis(estoque) {
-    const soma = estoque
-        .filter(item => item.qtd > 0)
-        .reduce((acc, item) => {
-            return acc + item.preco;
-        }, 0);
-    console.log(
-        `Soma dos preços dos produtos disponíveis: ${soma.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL"
-        })}`
-    );
-    return soma;
-}
-
-console.log(verificarDisponibilidade(estoque));
-
-
-somarValorTotalEstoque(estoque)
-
-
-somarPrecosProdutosDisponiveis(estoque)
+console.log("Produtos Disponíveis:\n", produtosDisponiveis);
+exibirValorTotalEstoque(produtosDisponiveis);
