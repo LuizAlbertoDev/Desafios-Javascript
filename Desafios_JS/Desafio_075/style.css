@@ -25,8 +25,25 @@ ul.lista li {
     color: #2563eb;
 }
 
+#btn-tema {
+  display: block;
+  margin: 16px auto;
+  padding: 8px 16px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+body.dark {
+  background-color: #1e1e1e;
+  color: white;
+}
+
 .destaque{
-    background-color: yellow;
+    background-color: #2563eb;
     padding: 8px;
 }
 
