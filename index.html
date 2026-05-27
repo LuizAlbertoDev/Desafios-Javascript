@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taskflow | Gerenciador de Tarefas</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Task<span>flow</span></h1>
+            <p>Organize seus estudos e atinja suas metas</p>
+        </header>
+
+        <main>
+            <!-- Formulário para adicionar tarefa -->
+            <form id="todo-form">
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        id="todo-input" 
+                        placeholder="Adicione uma nova tarefa para estudar..." 
+                        required 
+                        autocomplete="off"
+                    >
+                    <button type="submit" id="add-btn">Adicionar</button>
+                </div>
+            </form>
+
+            <!-- Lista de tarefas -->
+            <section class="task-section">
+                <div class="section-header">
+                    <h2>Minhas Tarefas</h2>
+                    <span id="task-counter" class="counter">0 tarefas</span>
+                </div>
+                <ul id="todo-list">
+                    <!-- As tarefas serão inseridas aqui dinamicamente pelo JavaScript -->
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
