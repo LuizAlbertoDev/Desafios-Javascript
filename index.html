@@ -3,343 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AtacadoPro - Mapa Inteligente (Dark Mode)</title>
-    <style>
-        :root {
-            /* Paleta Dark Mode Profissional */
-            --bg-body: #0b0f19;
-            --bg-panel: #111827;
-            --bg-surface: #1f2937;
-            --border-color: #374151;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --accent: #3b82f6;
-            --accent-glow: rgba(59, 130, 246, 0.5);
-            
-            /* Cores dos Setores */
-            --cor-acougue: #ef4444;
-            --cor-padaria: #f59e0b;
-            --cor-frios: #0ea5e9;
-            --cor-horti: #10b981;
-            
-            /* Cores dos Corredores */
-            --cor-a: #22c55e;
-            --cor-b: #3b82f6;
-            --cor-c: #f97316;
-            --cor-d: #a855f7;
-            --cor-e: #14b8a6;
-            --cor-f: #6366f1;
-            --cor-g: #d97706;
-        }
+    <title>Mercado Fácil</title>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
-        
-        body {
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            padding: 20px;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 25px;
-            background: var(--bg-panel);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
-
-        .header h1 { font-size: 20px; font-weight: 600; color: var(--accent); }
-        .status-badge { background: #064e3b; color: #34d399; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
-
-        .map-container {
-            flex-grow: 1;
-            background: var(--bg-panel);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        svg {
-            width: 100%;
-            height: 100%;
-            max-width: 1400px;
-        }
-
-        /* Estilos do SVG */
-        .floor { fill: var(--bg-body); stroke: var(--border-color); stroke-width: 2; rx: 8; }
-        
-        .section { cursor: pointer; transition: all 0.3s ease; }
-        .section rect { fill: var(--bg-surface); stroke: var(--border-color); stroke-width: 2; rx: 6; }
-        .section:hover rect { stroke: var(--accent); fill: #2d3748; }
-        .section.active rect { stroke: var(--accent); fill: #1e3a8a; filter: drop-shadow(0 0 8px var(--accent-glow)); }
-        
-        .section-text { fill: var(--text-main); font-size: 14px; font-weight: bold; text-anchor: middle; dominant-baseline: middle; pointer-events: none; }
-        .sub-text { fill: var(--text-muted); font-size: 10px; font-weight: normal; text-anchor: middle; pointer-events: none; }
-
-        .shelf { cursor: pointer; transition: 0.2s; }
-        .shelf rect { fill: var(--bg-surface); stroke: var(--border-color); stroke-width: 1.5; rx: 2; }
-        .shelf:hover rect { fill: #374151; stroke: #9ca3af; }
-        .shelf.active rect { fill: var(--accent); stroke: #fff; filter: drop-shadow(0 0 5px var(--accent)); }
-        
-        .shelf-id { fill: var(--text-muted); font-size: 10px; font-weight: bold; text-anchor: middle; pointer-events: none; }
-        .shelf.active .shelf-id { fill: #fff; }
-
-        .corridor-line { stroke: #374151; stroke-width: 1; stroke-dasharray: 4 4; }
-        
-        /* Rota Animada */
-        .route-path {
-            fill: none;
-            stroke: var(--accent);
-            stroke-width: 5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            stroke-dasharray: 10 8;
-            animation: dash 1s linear infinite;
-            filter: drop-shadow(0 0 4px var(--accent));
-        }
-        
-        @keyframes dash {
-            to { stroke-dashoffset: -18; }
-        }
-
-        .node-start { fill: var(--text-main); }
-        .node-end { fill: #ef4444; filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.8)); }
-
-        /* Painel de Informação Flutuante */
-        .info-panel {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(17, 24, 39, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-color);
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 10px 15px rgba(0,0,0,0.5);
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            min-width: 200px;
-        }
-        .info-panel.visible { display: flex; }
-        .info-panel h3 { color: var(--accent); font-size: 16px; margin: 0; }
-        .info-panel p { color: var(--text-muted); font-size: 13px; margin: 0; }
-        .close-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; position: absolute; right: 10px; top: 10px; }
-        .close-btn:hover { color: #fff; }
-    </style>
+    <link rel="stylesheet" href="./pages/css/global.css">
+    <link rel="stylesheet" href="./pages/css/dashboard.css">
 </head>
 <body>
 
-    <div class="header">
-        <h1>AtacadoPro <span style="color: var(--text-muted); font-weight: 400; font-size: 14px;">| Localizador de Produtos</span></h1>
-        <div class="status-badge">SISTEMA ONLINE</div>
-    </div>
+    <header>
+        <h1>Luiz Alberto huller da silva</h1>
 
-    <div class="map-container">
-        <svg id="loja-svg" viewBox="0 0 1200 850">
-            <rect class="floor" x="10" y="10" width="1180" height="830" />
+        <nav>
+            <ul>
+                <li><a href="#sobre">Sobre mim</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#contato">Contato</a></li>
+                <li><a href="https://google.com.br" target="_blank">Google</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="sobre">
+        <h2>Titulo menor</h2>
+        
+        <img src="https://cdn-icons-png.flaticon.com/512/4042/4042171.png" alt="Imagem de foto de Perfil" title="Imagem de perfil">
 
-            <g class="section" id="setor-acougue" onclick="tracarRota('Açougue', 'Carnes Frescas', 80, 80)">
-                <rect x="20" y="20" width="120" height="120" style="stroke: var(--cor-acougue);" />
-                <text x="80" y="70" class="section-text" style="fill: var(--cor-acougue);">AÇOUGUE</text>
-            </g>
+        <article>
+            <p>
+                Olá, eu sou o Luiz Alberto
+            </p>
+        </article>
 
-            <g class="section" id="setor-frios" onclick="tracarRota('Frios', 'Laticínios e Embutidos', 80, 240)">
-                <rect x="20" y="150" width="120" height="180" style="stroke: var(--cor-frios);" />
-                <text x="80" y="220" class="section-text" style="fill: var(--cor-frios);">FRIOS</text>
-                <text x="80" y="245" class="sub-text">LATICÍNIOS</text>
-                <text x="80" y="265" class="sub-text">QUEIJOS</text>
-            </g>
+        <aside>
 
-            <g class="section" id="setor-horti" onclick="tracarRota('Hortifruti', 'Frutas e Verduras', 80, 430)">
-                <rect x="20" y="340" width="120" height="180" style="stroke: var(--cor-horti);" />
-                <text x="80" y="410" class="section-text" style="fill: var(--cor-horti);">HORTIFRUTI</text>
-                <text x="80" y="435" class="sub-text">FRUTAS</text>
-                <text x="80" y="455" class="sub-text">VERDURAS</text>
-            </g>
+            <h3>habilidades</h3>
 
-            <g class="section" id="setor-padaria" onclick="tracarRota('Padaria', 'Pães e Bolos', 80, 620)">
-                <rect x="20" y="530" width="120" height="140" style="stroke: var(--cor-padaria);" />
-                <text x="80" y="590" class="section-text" style="fill: var(--cor-padaria);">PADARIA</text>
-                <text x="80" y="615" class="sub-text">PÃES QUENTES</text>
-            </g>
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>Javascript</li>
+            </ul>
 
-            <g class="section" id="setor-bebidas" onclick="tracarRota('Bebidas', 'Sucos e Refrigerantes', 1120, 160)">
-                <rect x="1060" y="20" width="120" height="280" style="stroke: var(--cor-b);" />
-                <text x="1120" y="140" class="section-text" style="fill: var(--cor-b);">BEBIDAS</text>
-                <text x="1120" y="170" class="sub-text">ÁGUAS & SUCOS</text>
-            </g>
+        </aside>
+    </section>
 
-            <g class="section" id="setor-adega" onclick="tracarRota('Adega', 'Vinhos e Destilados', 1120, 380)">
-                <rect x="1060" y="310" width="120" height="140" style="stroke: var(--cor-d);" />
-                <text x="1120" y="380" class="section-text" style="fill: var(--cor-d);">ADEGA</text>
-            </g>
+    <section id="projetos">
+        <h2>Projetos</h2>
 
-            <g class="section" id="setor-deposito" onclick="tracarRota('Depósito', 'Acesso Restrito', 1120, 520)">
-                <rect x="1060" y="460" width="120" height="120" />
-                <text x="1120" y="520" class="section-text">DEPÓSITO</text>
-            </g>
+        <article>
+            <h3>Portifolio</h3>
 
-            <g class="section" id="setor-sanitarios" onclick="tracarRota('Sanitários', 'WC Clientes', 1120, 640)">
-                <rect x="1060" y="590" width="120" height="80" />
-                <text x="1120" y="630" class="section-text">SANITÁRIOS</text>
-            </g>
+            <p>
+                Este foi o primeiro site que desenvolvi estudando Frontend
+            </p>
+        </article>
+    </section>
 
-            <g id="corredores-dinamicos"></g>
+    <section id="habilidades">
 
-            <rect x="150" y="350" width="900" height="40" fill="var(--bg-body)" />
+        <h2>Habilidades e tecnologias</h2>
 
-            <g id="area-caixas">
-                <rect x="540" y="760" width="120" height="70" fill="var(--bg-surface)" stroke="var(--cor-horti)" stroke-width="2" rx="4"/>
-                <text x="600" y="795" fill="var(--cor-horti)" font-size="16" font-weight="bold" text-anchor="middle">ENTRADA</text>
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Tecnologia</th>
+                    <th>Nivel</th>
+                    <th>Descricao</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>HTML</td>
+                    <td>Iniciante</td>
+                    <td>Capaz de contruir estruturas de paginas web semanticas e responsivas</td>
+                </tr>
+
+                <tr>
+                    <td>CSS</td>
+                    <td>Intermediario</td>
+                    <td>Experiencia com flexbox, grid e animacoes CSS</td>
+                </tr>
+
+                <tr>
+                    <td>JavaScript</td>
+                    <td>Basico</td>
+                    <td>Desenvolvimento de scripts do lado do cliente para interacoes</td>
+                </tr>
                 
-                <g id="caixas-dinamicos"></g>
-            </g>
+            </tbody>
 
-            <path id="rota-ativa" class="route-path" d="" />
-            <circle id="ponto-inicio" class="node-start" r="6" cx="0" cy="0" style="display: none;" />
-            <circle id="ponto-fim" class="node-end" r="8" cx="0" cy="0" style="display: none;" />
-        </svg>
+        </table>
 
-        <div class="info-panel" id="info-panel">
-            <button class="close-btn" onclick="limparRota()">✖</button>
-            <span style="font-size: 10px; text-transform: uppercase; color: var(--text-muted); font-weight: bold;">Destino Selecionado</span>
-            <h3 id="info-titulo">--</h3>
-            <p id="info-desc">--</p>
-        </div>
-    </div>
+    </section>
 
-    <script>
-        // ==========================================
-        // 1. GERAÇÃO DINÂMICA DA MALHA (JS PURO)
-        // Isso mostra controle de DOM e mantém o HTML enxuto.
-        // ==========================================
-        const corredoresSvg = document.getElementById('corredores-dinamicos');
-        const configCorredores = [
-            { id: 'A', x: 170, color: 'var(--cor-a)' },
-            { id: 'B', x: 290, color: 'var(--cor-b)' },
-            { id: 'C', x: 410, color: 'var(--cor-c)' },
-            { id: 'D', x: 530, color: 'var(--cor-d)' },
-            { id: 'E', x: 650, color: 'var(--cor-e)' },
-            { id: 'F', x: 770, color: 'var(--cor-f)' },
-            { id: 'G', x: 890, color: 'var(--cor-g)' }
-        ];
+    <footer id="contato">
+        <p>Direitos reservados a Luiz Alberto</p>
 
-        let htmlCorredores = '';
+        <section>
+            <h2>contato</h2>
+            <p>Tem um projeto em mente? Entre em contato</p>
 
-        configCorredores.forEach(corr => {
-            // Header do Corredor
-            htmlCorredores += `
-                <rect x="${corr.x + 5}" y="30" width="80" height="30" fill="${corr.color}" rx="4"/>
-                <text x="${corr.x + 45}" y="45" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle" dominant-baseline="middle">CORREDOR ${corr.id}</text>
-                <line x1="${corr.x + 45}" y1="65" x2="${corr.x + 45}" y2="670" class="corridor-line" />
-            `;
+            <form action="">
 
-            // Gerando Prateleiras (1 a 10)
-            for (let i = 1; i <= 10; i++) {
-                // Cálculo de posição Y para pular a via central
-                let yPos = i <= 5 ? 80 + ((i-1) * 52) : 410 + ((i-6) * 52);
-                let idPrateleira = `${corr.id}${i}`;
-                let centroX = corr.x + 45;
-                let centroY = yPos + 20;
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required> <br>
 
-                htmlCorredores += `
-                    <g id="gondola-${idPrateleira}" class="shelf" onclick="tracarRota('Corredor ${corr.id}', 'Gôndola ${idPrateleira}', ${centroX}, ${centroY}, '${idPrateleira}')">
-                        <rect x="${corr.x - 5}" y="${yPos}" width="30" height="40" />
-                        <text x="${corr.x + 10}" y="${yPos + 20}" class="shelf-id">${idPrateleira}</text>
-                        
-                        <rect x="${corr.x + 65}" y="${yPos}" width="30" height="40" />
-                        <text x="${corr.x + 80}" y="${yPos + 20}" class="shelf-id">${idPrateleira}</text>
-                    </g>
-                `;
-            }
-        });
-        corredoresSvg.innerHTML = htmlCorredores;
+                <label for="email">email:</label>
+                <input type="email" id="email" name="email" required> <br>
 
-        // Gerar Caixas
-        const caixasSvg = document.getElementById('caixas-dinamicos');
-        let htmlCaixas = '';
-        for(let i=1; i<=16; i++) {
-            if(i === 9) continue; // Pula a área da entrada
-            let xPos = i < 9 ? 40 + ((i-1) * 60) : 680 + ((i-9) * 60);
-            if(i > 8) xPos = 680 + ((i-9) * 60);
+                <label for="telefone">Telefone:</label>
+                <input type="tel" id="telefone" name="telefone"> <br>
 
-            htmlCaixas += `
-                <rect x="${xPos}" y="770" width="40" height="50" fill="var(--bg-surface)" stroke="var(--border-color)" rx="2"/>
-                <text x="${xPos + 20}" y="795" fill="var(--text-muted)" font-size="12" font-weight="bold" text-anchor="middle">CX${i}</text>
-            `;
-        }
-        caixasSvg.innerHTML = htmlCaixas;
+                <label for="assunto">Assunto:</label>
+                <select name="assunto" id="assunto">
+                    <option value="orcamento">orçamento</option>
+                    <option value="duvida">duvida</option>
+                    <option value="outro">outro</option>
+                </select> <br>
 
-        // ==========================================
-        // 2. MOTOR DE ROTEAMENTO (PATHFINDING LÓGICO)
-        // ==========================================
-        const ENTRADA_X = 600;
-        const ENTRADA_Y = 760;
-        const VIA_PRINCIPAL_Y = 710; 
-        const VIA_CRUZAMENTO_Y = 370;
+                <label for="mensagem">Mensagem</label>
+                <textarea name="mensagem" id="mensagem" cols="30" rows="10" required></textarea>
 
-        function tracarRota(titulo, descricao, targetX, targetY, idGondola = null) {
-            limparRota();
+                <input type="checkbox" id="inscricao" name="inscricao"> <br>
+                <label for="inscricao">Deseja receber minha newsletter? fique por dentro!</label> <br>
 
-            // Adiciona classe 'active' ao item clicado
-            if(idGondola) {
-                document.getElementById(`gondola-${idGondola}`).classList.add('active');
-            }
 
-            let path = [];
-            path.push(`${ENTRADA_X},${ENTRADA_Y}`); 
-            path.push(`${ENTRADA_X},${VIA_PRINCIPAL_Y}`); // Sobe da entrada até o corredor principal
+                <input type="submit" value="Enviar Mensagem">
+            </form>
+        </section>
+    </footer>
 
-            if (idGondola) {
-                // É um corredor central
-                path.push(`${targetX},${VIA_PRINCIPAL_Y}`); // Anda de lado até o corredor
-                path.push(`${targetX},${targetY}`); // Sobe/Desce até a prateleira
-            } else {
-                // É um setor lateral
-                let cantoX = targetX < ENTRADA_X ? 150 : 1050; 
-                path.push(`${cantoX},${VIA_PRINCIPAL_Y}`); // Vai até o canto da loja
-                path.push(`${cantoX},${targetY}`); // Sobe pelo corredor lateral
-                path.push(`${targetX},${targetY}`); // Entra no setor
-            }
 
-            // Atualiza o SVG Path
-            document.getElementById('rota-ativa').setAttribute('d', `M ${path.join(' L ')}`);
-            
-            // Exibe e posiciona os nós (Bolinhas de início e fim)
-            let ptInicio = document.getElementById('ponto-inicio');
-            let ptFim = document.getElementById('ponto-fim');
-            ptInicio.setAttribute('cx', ENTRADA_X); ptInicio.setAttribute('cy', ENTRADA_Y); ptInicio.style.display = 'block';
-            ptFim.setAttribute('cx', targetX); ptFim.setAttribute('cy', targetY); ptFim.style.display = 'block';
-
-            // Atualiza UI
-            document.getElementById('info-titulo').innerText = titulo;
-            document.getElementById('info-desc').innerText = descricao;
-            document.getElementById('info-panel').classList.add('visible');
-        }
-
-        function limparRota() {
-            document.getElementById('rota-ativa').setAttribute('d', '');
-            document.getElementById('ponto-inicio').style.display = 'none';
-            document.getElementById('ponto-fim').style.display = 'none';
-            document.getElementById('info-panel').classList.remove('visible');
-            
-            document.querySelectorAll('.shelf.active, .section.active').forEach(el => {
-                el.classList.remove('active');
-            });
-        }
-    </script>
 </body>
 </html>
