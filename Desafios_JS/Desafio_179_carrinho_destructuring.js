@@ -4,6 +4,9 @@ const carrinho = [
     { nome: "Cabo HDMI", preco: 30, categoria: "Acessórios" }
 ];
 
+const [{nome:nomeProduto1,preco: precoProduto1}] = carrinho
+
+
 function adicionarProduto(carrinhoAtual, novoProduto){
     return [...carrinhoAtual, novoProduto]
 }
